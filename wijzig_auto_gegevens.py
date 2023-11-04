@@ -1,5 +1,6 @@
 import sqlite3
-
+from versie_def import versie_info
+versie_info()
 db = sqlite3.connect("auto_data.db")
 cursor = db.cursor()
 
