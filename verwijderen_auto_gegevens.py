@@ -21,7 +21,11 @@ info_verwijderen_auto = cursor.fetchall()
 if len(info_verwijderen_auto) == 0:
     print(f"Ingevoerde kenteken: {zoek_auto_verwijderen}, kan niet gevonden worden in de database!")
 else:
-    for i in info_verwijderen_auto:
-        cursor.execute("DELETE FROM auto_voorraad WHERE Kenteken = ?",(i[0],))
-        print(f"Kenteken {i[0]} is verwijderd!")
-        Database.sluit_verbinding()
+    keuze = input(f"Weet u zeker dat u kenteken: {zoek_auto_verwijderen} wilt verwijderen ? kies ja voor defentief verwijderen" ).lower()
+    if keuze == "ja":
+        for i in info_verwijderen_auto:
+            cursor.execute("DELETE FROM auto_voorraad WHERE Kenteken = ?",(i[0],))
+            print(f"Kenteken {i[0]} is verwijderd!")
+            Database.sluit_verbinding()
+    else:
+        print("Geen kenteken verwijderd!")
