@@ -79,4 +79,10 @@ class wijzig_auto_gegevens(Database):
             cursor.execute("UPDATE auto_voorraad SET aantal_zitplaatsen = ? WHERE aantal_zitplaatsen = ?",(nieuwe_aantal_zitplaatsen,i[7]))
             print(f"Uw aantal zitplaatsen is gewijzigd, nieuwe zitplaatsen is: {nieuwe_aantal_zitplaatsen}")
             Database.sluit_verbinding()
-
+        elif keuze == 9:
+            nieuwe_landcode = input(f"Huidige landcode: {i[8]}, nieuwe landcode is: ").upper()
+            cursor.execute("UPDATE auto_voorraad SET Registratie_land = ? WHERE Registratie_land = ?",(nieuwe_landcode,i[8]))
+            print(f"Uw landcode is gewijzigd, nieuwe landcode is: {nieuwe_landcode}")
+            Database.sluit_verbinding()
+        else:
+            print("Ongeldige keuze!")
