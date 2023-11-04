@@ -74,5 +74,9 @@ class wijzig_auto_gegevens(Database):
                Database.sluit_verbinding()
             else:
                 exit("Geen geldige brandstog ingevoerd!")
-
+        elif keuze == 8:
+            nieuwe_aantal_zitplaatsen = input(f"Huidige zitplaatsen: {i[7]}, nieuwe zitplaatsen: ")
+            cursor.execute("UPDATE auto_voorraad SET aantal_zitplaatsen = ? WHERE aantal_zitplaatsen = ?",(nieuwe_aantal_zitplaatsen,i[7]))
+            print(f"Uw aantal zitplaatsen is gewijzigd, nieuwe zitplaatsen is: {nieuwe_aantal_zitplaatsen}")
+            Database.sluit_verbinding()
 
