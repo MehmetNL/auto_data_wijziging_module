@@ -22,6 +22,6 @@ def print_gegevens(info2):
         for i in info2:
             print("{0:15s} {1:25s} {2:25s} {3:25s} {4:25s} {5:25s} {6:25s} {7:25s} {8:26s}".format(i[0], i[1], i[2],
                                                                                                i[3],
-                                                                                               i[4],
+                                                                                               i[4][:4],
                                                                                                i[5], i[6], i[7],
                                                                                                i[8]))
