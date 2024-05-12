@@ -19,11 +19,27 @@ def zoek_op_soort():
         keuze_check = "Brandstof"
     elif keuze_check == 4:
         keuze_check = "Aantal_zitplaatsen"
+    elif keuze_check == 5:
+        keuze_check = "Registratie_land"
+        zoek_op_soort_type = input("Zoek op soort: ").upper()
+        cursor.execute(f"SELECT COUNT(*) FROM auto_voorraad WHERE {keuze_check} = ?", (zoek_op_soort_type,))
+
+        info_auto = cursor.fetchall()
+        count = info_auto[0]
+        if len(info_auto) == 0:
+            print(f"Geen informatie gevonden over: {zoek_op_soort_type}")
+
+        else:
+            print(f"Zoek resultaat: u heeft van {zoek_op_soort_type}: {count} stuks auto in uw wagen park.")
+            cursor.execute(f"SELECT * FROM auto_voorraad WHERE {keuze_check} = ?",
+                           (zoek_op_soort_type,))  # opnieuw een sql query
+            lijst2 = cursor.fetchall()
+            print_gegevens_auto.print_gegevens(lijst2)
     else:
         print("Geen geldige keuze")
 
     zoek_op_soort_type = input("Zoek op soort: ").capitalize()
-
+    #keuze_check2 = cursor.execute(f"SELECT COUNT(*) FROM auto_voorraad WHERE {keuze_check} = ?", (zoek_op_soort_type2,))
     cursor.execute(f"SELECT COUNT(*) FROM auto_voorraad WHERE {keuze_check} = ?", (zoek_op_soort_type,))
 
 

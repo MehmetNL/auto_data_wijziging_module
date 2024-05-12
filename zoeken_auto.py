@@ -7,17 +7,6 @@ db = sqlite3.connect("auto_data.db")
 cursor = db.cursor()
 
 
-class Database:
-    def __init__(self, db_name):
-        self.db = sqlite3.connect(db_name)
-        self.cursor = self.db.cursor()
-
-    @staticmethod
-    def sluit_verbinding():
-        db.commit()
-        db.close()
-
-
 kenteken_zoeken = input("Kenteken: ").upper()
 cursor.execute("SELECT * FROM auto_voorraad WHERE Kenteken = ?", (kenteken_zoeken,))
 info_auto = cursor.fetchall()

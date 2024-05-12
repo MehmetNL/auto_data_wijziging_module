@@ -16,13 +16,13 @@ class Database:
         db.close()
 
 
-class wijzig_auto_gegevens(Database):
-    def controleer_kenteken(self):
-        cursor.execute("SELECT COUNT(*) FROM auto_voorraad WHERE Kenteken = ?", (self,))
+class wijzig_auto_gegevens():
+    def controleer_kenteken(nieuwe_kenteken):
+        cursor.execute("SELECT COUNT(*) FROM auto_voorraad WHERE Kenteken = ?", (nieuwe_kenteken,))
         result = cursor.fetchone()
         count = result[0] #[0] moet tupel omgezet worden in list, zodat vergelijk gemaakt kan worden
         if count > 0:
-            exit(f"Kenteken {self} bestaat al in uw auto voorraad, u kunt dit niet wijzigen!")
+            exit(f"Kenteken {nieuwe_kenteken} bestaat al in uw auto voorraad, u kunt dit niet wijzigen!")
 
 
     kenteken = input("Vul hier uw kenteken die u wilt wijzigen: ").upper()
@@ -32,9 +32,9 @@ class wijzig_auto_gegevens(Database):
         print("Kenteken niet gevonden")
     else:
         for i in info_auto:
-            print(f"Wijziging\n1: Kenteken {i[0]}\n2: Merk {i[1]}\n3: Model {i[2]}\n4: Kleur {i[3]}\n5: Bouwjaar {i[4]}\n6: Catalogus Waarde {i[5]}\n7: Brandstof {i[6]}\n8: Aantal Zitplaatsen {i[7]}\n9: Land Code {i[8]}")
-
-        keuze = int(input("Maak een keuze wijzigen: "))
+            print(f"Wijziging\n1: Kenteken {i[0]}\n2: Merk {i[1]}\n3: Model {i[2]}\n4: Kleur {i[3]}\n5: Bouwjaar {i[4][:4]}\n6: Catalogus Waarde {i[5]}\n7: Brandstof {i[6]}\n8: Aantal Zitplaatsen {i[7]}\n9: Land Code {i[8]}")
+            # Bouwjaar wordt aleen eerste 4 karakters gettoond
+        keuze: int = input("Maak een keuze wijzigen: ")
         if keuze == 1:
             nieuwe_kenteken = input(f"Uw oude kenteken is {i[0]} vul uw nieuwe kenteken: ").upper()
             controleer_kenteken(nieuwe_kenteken)
